@@ -27,6 +27,6 @@ case "$1" in
     ;;
 
 *)
-    echo "usage: docker.sh [build]"
+    echo "usage: docker.sh [build|mocha]"
     ;;
 esac
