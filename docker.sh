@@ -17,12 +17,16 @@ case "$1" in
     ;;
 
 "mocha" )
+    TARGET=`echo $2 | sed 's/^opt\///'`
+    shift
+    shift
+
     docker run \
       --rm \
       --name ${SERVICE_NAME} \
       -v "$(pwd)"/opt:/opt \
       ${REPO}:${TAG} \
-      mocha
+      mocha ${TARGET} $@
     exit
     ;;
 
