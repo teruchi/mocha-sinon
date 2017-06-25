@@ -2,10 +2,11 @@
 var sinon = require('sinon');
 var assert = require('assert');
 
-// jQuery初期化
+// windowオブジェクト生成
 var jsdom = require('jsdom/lib/old-api.js');
 global.window = jsdom.jsdom().defaultView;
 
+// jQuery初期化
 var $ = require('jquery');
 
 
@@ -41,23 +42,33 @@ describe('Test User API', function () {
     /**
      * $.getのテスト
      */
-    it("get /api/users/100", function() {
+    it("get /api/users/100", () => {
+        // Initialize
+        var response = {
+            id: 100,
+            name: "teruchi"
+        };
+
+        // Test
         $.getJSON('/api/users/100', spy);
 
-        //server.respond('{id:100, name:"teruchi"}');
+
         server.respond(
             'GET',
             '/api/users/100',
             [
                 200,
-                { 'Content-Type': 'application/json' },
-                JSON.stringify({id:100, name:"teruchi"})
+                {
+                    'Content-Type': 'application/json'
+                },
+                JSON.stringify(response)
             ]
         );
 
-        assert(spy.called);
+        // Assertions
+        assert(spy.calledOnce);
 
-        assert(spy.calledWith({id:100, name:"teruchi"}));
+        assert(spy.calledWith(response));
     });
 });
 
