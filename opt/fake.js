@@ -17,23 +17,23 @@ describe('Test User API', function () {
     var server;
     var spy;
 
+    /**
+     * before test
+     */
     before(() => {
+        // sinon Fake Server生成
         server = sinon.fakeServer.create();
 
-        global.XMLHttpRequest = global.window.XMLHttpRequest = server.xhr;
+        // XMLHttpRequest置き換え
+        global.window.XMLHttpRequest = server.xhr;
 
-        var onCreate = global.window.XMLHttpRequest.onCreate;
-
-        global.window.XMLHttpRequest.onCreate = function(xhr) {
-            xhr.setRequestHeader = sinon.stub();
-            xhr.getAllResponseHeaders = sinon.stub();
-
-            onCreate(xhr);
-        };
-
+        // Sinon Spy初期化
         spy = sinon.spy();
     });
 
+    /**
+     * after test
+     */
     after(() => {
         server.restore();
     });
