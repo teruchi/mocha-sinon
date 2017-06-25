@@ -15,6 +15,16 @@ case "$1" in
       .
     ;;
 
+"mocha" )
+    docker run \
+      --rm \
+      --name ${SERVICE_NAME} \
+      -v "$(pwd)"/opt:/opt \
+      ${REPO}:${TAG} \
+      mocha &
+    exit
+    ;;
+
 *)
     echo "usage: docker.sh [build]"
     ;;
