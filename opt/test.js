@@ -5,8 +5,8 @@ var jsdom = require('jsdom/lib/old-api.js');
 var window = jsdom.jsdom().defaultView;
 var $ = require('jquery')(window);
 
-describe('User API', function () {
-    it("/api/users/100", function (done) {
+describe('Test User API', function () {
+    it("get /api/users/100", function (done) {
         sinon.stub($, 'get').callsFake(function(url, success, dataType) {
             success({
                 id: 100,
@@ -27,7 +27,7 @@ describe('User API', function () {
         );
     });
 
-    it("/api/users/100", function (done) {
+    it("ajax /api/users/100", function (done) {
         sinon.stub($, 'ajax').returns({
             done : function(callback) {
                 callback({
