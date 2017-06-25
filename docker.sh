@@ -13,6 +13,7 @@ case "$1" in
       -t ${REPO}:${TAG} \
       -f ${DOCKERFILE} \
       .
+    exit
     ;;
 
 "mocha" )
@@ -21,7 +22,7 @@ case "$1" in
       --name ${SERVICE_NAME} \
       -v "$(pwd)"/opt:/opt \
       ${REPO}:${TAG} \
-      mocha &
+      mocha
     exit
     ;;
 
